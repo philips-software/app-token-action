@@ -134,5 +134,5 @@ Use the badge to sign-up.
 [![Slack](https://philips-software-slackin.now.sh/badge.svg)](https://philips-software-slackin.now.sh)
 
 [contribute]: CONTRIBUTING.md
-[github]: https://github.com/philips-software/spdx-action/issues 
+[github]: https://github.com/philips-software/app-token-action/issues 
 [slack]: https://philips-software.slack.com/home
