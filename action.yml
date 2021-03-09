@@ -1,0 +1,29 @@
+name: 'Create an application or application installation token.'
+description: 'Action will set application or application installation token as output.'
+author: 'Niek Palm'
+branding:
+  icon: 'alert-triangle'
+  color: 'green'
+
+inputs:
+  app_id:
+    description: Application ID
+    required: true
+  app_base64_private_key:
+    description: Application SSH private key as base64 
+    required: true
+  auth_type:
+    description: Authorization type, either app or installation
+    required: false
+    default: 'app'
+  org:
+    description: Name of the org, if not provided will be read from the event.
+    required: false
+
+outputs:
+  token:
+    description: Application token
+
+runs:
+  using: node12
+  main: dist/index.js

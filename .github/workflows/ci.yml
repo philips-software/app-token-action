@@ -1,0 +1,62 @@
+name: 'CI'
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['12', '14']
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: yarn install
+      - name: Check format and lint
+        run: yarn run format-check && yarn lint
+      - name: Build and package
+        run: yarn build
+
+      - name: Update dist in the repository
+        if: github.event_name != 'pull_request' && matrix.node-version == 12
+        uses: stefanzweifel/git-auto-commit-action@v4.8.0
+        with:
+          commit_message: 'chore(ci): Updating dist'
+          file_pattern: dist/*
+
+  release:
+    if: github.event_name != 'pull_request' && contains('refs/heads/develop, refs/heads/main', github.ref)
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: ./
+        id: app
+        with:
+          app_id: ${{ secrets.FOREST_RELEASER_APP_ID }}
+          app_base64_private_key: ${{ secrets.FOREST_RELEASER_APP_PRIVATE_KEY_BASE64 }}
+          auth_type: installation
+          org: philips-software
+
+      - name: Dry run release
+        env:
+          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+        run: yarn && yarn run release -d
+
+      - name: Release
+        if: github.event_name != 'pull_request' && contains('refs/heads/main', github.ref)
+        env:
+          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+        run: yarn && yarn run release
