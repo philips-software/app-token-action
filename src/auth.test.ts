@@ -14,9 +14,11 @@ const defaultParameters: Parameters = {
   base64PrivateKey: testBase64PrivateKey,
 };
 
-function mockGetOrgInstallation(id: number): void {
-  nock('https://api.github.com').persist().get(`/orgs/${testOrg}/installation`).reply(200, { id });
+function mockGetOrgInstallation(id: number, org: string): void {
+  const responseCode = id < 0 ? 403 : 200;
+  nock('https://api.github.com').persist().get(`/orgs/${org}/installation`).reply(responseCode, { id });
 }
+
 function mockAppInstallationToken(id: string): void {
   nock('https://api.github.com')
     .persist()
@@ -32,7 +34,7 @@ describe('Auth type installation', () => {
   beforeEach(() => {
     jest.restoreAllMocks();
     jest.clearAllMocks();
-    mockGetOrgInstallation(47);
+    mockGetOrgInstallation(47, testOrg);
     mockAppInstallationToken('47');
   });
 
@@ -53,11 +55,30 @@ describe('Auth type installation', () => {
   });
 });
 
-describe('Auth type app', () => {
+describe('App not installed.', () => {
   beforeEach(() => {
     jest.restoreAllMocks();
     jest.clearAllMocks();
-    mockGetOrgInstallation(47);
+    jest.resetAllMocks();
+    mockGetOrgInstallation(-1, 'org-without-apps');
+    mockAppInstallationToken('-1');
+  });
+
+  test('Should throw exception for app that is not installed..', async () => {
+    await expect(
+      getToken({
+        ...defaultParameters,
+        org: 'org-without-apps',
+      }),
+    ).rejects.toThrow();
+  });
+});
+
+describe('Auth type 222', () => {
+  beforeEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
+    mockGetOrgInstallation(47, testOrg);
   });
 
   test('Should throw exception for invalid private key.', async () => {
