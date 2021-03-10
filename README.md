@@ -26,7 +26,7 @@ Before the action can be used the APP has to be installed on the subject reposit
 
 This action is an `node12` action.
 
-### Example
+## Usage
 
 Below an example snippet how to use the action.
 
@@ -57,7 +57,7 @@ Running locally requires you hav have an app in your org that is installed on on
 
 - `INPUT_AUTH_TYPE` : `app` or `token`
 - `INPUT_APP_ID` and `INPUT_APP_BASE64_PRIVATE_KEY`: The app id and app ssh key. 
--`INPUT_ORG`: The org in which the app is installed.
+- `INPUT_ORG`: The org in which the app is installed.
 
 
 **Example:**
