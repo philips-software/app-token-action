@@ -15302,7 +15302,7 @@ const getAppInstallationToken = (privateKey, appId, org) => __awaiter(void 0, vo
 });
 exports.getAppInstallationToken = getAppInstallationToken;
 const getToken = (parameters) => __awaiter(void 0, void 0, void 0, function* () {
-    let token = undefined;
+    let token;
     const privateKey = Buffer.from(parameters.base64PrivateKey, 'base64').toString();
     switch (parameters.type) {
         case 'installation': {
@@ -15374,6 +15374,8 @@ function run() {
                 type: authType,
                 org,
             });
+            // some github magic seems masking the token by default, but just to ensure it is registered as secret.
+            core.setSecret(token);
             core.setOutput('token', token);
         }
         catch (error) {

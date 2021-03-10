@@ -44,8 +44,8 @@ export const getAppInstallationToken = async (privateKey: string, appId: number,
   }
 };
 
-export const getToken = async (parameters: Parameters): Promise<string | undefined> => {
-  let token = undefined;
+export const getToken = async (parameters: Parameters): Promise<string> => {
+  let token: string;
 
   const privateKey = Buffer.from(parameters.base64PrivateKey, 'base64').toString();
   switch (parameters.type) {
@@ -58,5 +58,6 @@ export const getToken = async (parameters: Parameters): Promise<string | undefin
       break;
     }
   }
+
   return token;
 };

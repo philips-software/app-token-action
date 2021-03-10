@@ -19,6 +19,8 @@ async function run(): Promise<void> {
       org,
     });
 
+    // some github magic seems masking the token by default, but just to ensure it is registered as secret.
+    core.setSecret(token);
     core.setOutput('token', token);
   } catch (error) {
     core.debug(error);
