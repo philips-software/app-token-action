@@ -1,9 +1,6 @@
 name: 'CI'
 on:
   push:
-    branches:
-      - main
-      - develop
   pull_request:
 
 jobs:
@@ -34,7 +31,7 @@ jobs:
           file_pattern: dist/*
 
   release:
-    if: github.event_name != 'pull_request' && contains('refs/heads/develop, refs/heads/main', github.ref)
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -50,10 +47,14 @@ jobs:
           auth_type: installation
           org: philips-software
 
+      - name: Extract branch name
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+        id: branch
+
       - name: Dry run release
         env:
           GITHUB_TOKEN: ${{ steps.app.outputs.token }}
-        run: yarn && yarn run release -d
+        run: yarn && yarn run release -d -b ${{ steps.branch.outputs.short_ref }}
 
       - name: Release
         if: github.event_name != 'pull_request' && contains('refs/heads/main', github.ref)

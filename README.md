@@ -4,22 +4,29 @@ A GitHub action that obtains a token for an app authorization which can used ins
 
 Before the action can be used the APP has to be installed on the subject repository or in the organization scope.
 
-## Action input parameters
 
-| Parameter              | Description                                                   | required | default |
-| ---------------------- | :------------------------------------------------------------ | -------- | ------- |
-| app_id                 | Application id                                                | true     |         |
-| app_base64_private_key | Application SSH private key as base64                         | true     |         |
-| auth_type              | Authorization type                                            | false    | app     |
-| org                    | Name of the org, if not provided will be read from the event. | false    |         |
+## Inputs
 
-## Action output parameters
+| parameter              | description                                                   | required | default |
+| ---------------------- | ------------------------------------------------------------- | -------- | ------- |
+| app_id                 | Application ID                                                | `true`   |         |
+| app_base64_private_key | Application SSH private key as base64                         | `true`   |         |
+| auth_type              | Authorization type, either app or installation                | `false`  | app     |
+| org                    | Name of the org, if not provided will be read from the event. | `false`  |         |
 
-| Parameter | Description                |
-| --------- | :------------------------- |
-| token     | GitHub authorization token |
 
-### Example
+## Outputs
+
+| parameter | description       |
+| --------- | ----------------- |
+| token     | Application token |
+
+
+## Runs
+
+This action is an `node12` action.
+
+## Usage
 
 Below an example snippet how to use the action.
 
@@ -46,12 +53,11 @@ Standard commands such as lint, test and build are available via yarn. Check [pa
 
 ### Test locally
 
-To run the action core function locally a simple wrapper is provided in [src/local.ts]. To run the wrapper ensure you have set the environment variables `INPUT_APP_REPO`, `APP_ID` and `APP_BASE64_PRIVATE_KEY`. `APP_REPO` takes a `philips-internal` repository name. Next run `yarn run watch`.
+Running locally requires you hav have an app in your org that is installed on one or more repositories. To run the local ensure you have set the environment variables:
 
-
-const appType = core.getInput('auth_type', { required: true }) as 'installation' | 'app';
-const appId = Number(core.getInput('app_id', { required: true }));
-const appBase64PrivateKey = core.getInput('app_base64_private_key
+- `INPUT_AUTH_TYPE` : `app` or `token`
+- `INPUT_APP_ID` and `INPUT_APP_BASE64_PRIVATE_KEY`: The app id and app ssh key. 
+- `INPUT_ORG`: The org in which the app is installed.
 
 
 **Example:**

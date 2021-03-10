@@ -15282,18 +15282,23 @@ exports.getAppToken = getAppToken;
 const getAppInstallationToken = (privateKey, appId, org) => __awaiter(void 0, void 0, void 0, function* () {
     const appToken = yield exports.getAppToken(privateKey, appId);
     const octokit = new rest_1.Octokit({ auth: appToken });
-    const installationId = yield octokit.apps.getOrgInstallation({
-        org,
-    });
-    const authAuthInstallation = auth_app_1.createAppAuth({
-        appId,
-        privateKey,
-        installationId: installationId.data.id,
-    });
-    const auth = yield authAuthInstallation({
-        type: 'installation',
-    });
-    return auth.token;
+    try {
+        const installationId = yield octokit.apps.getOrgInstallation({
+            org,
+        });
+        const authAuthInstallation = auth_app_1.createAppAuth({
+            appId,
+            privateKey,
+            installationId: installationId.data.id,
+        });
+        const auth = yield authAuthInstallation({
+            type: 'installation',
+        });
+        return auth.token;
+    }
+    catch (e) {
+        throw new Error(`Cannot find installation for app with id: ${appId}. Did you installed your app in a repo?`);
+    }
 });
 exports.getAppInstallationToken = getAppInstallationToken;
 const getToken = (parameters) => __awaiter(void 0, void 0, void 0, function* () {

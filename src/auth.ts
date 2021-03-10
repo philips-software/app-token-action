@@ -24,21 +24,24 @@ export const getAppInstallationToken = async (privateKey: string, appId: number,
   const appToken = await getAppToken(privateKey, appId);
   const octokit = new Octokit({ auth: appToken });
 
-  const installationId = await octokit.apps.getOrgInstallation({
-    org,
-  });
+  try {
+    const installationId = await octokit.apps.getOrgInstallation({
+      org,
+    });
+    const authAuthInstallation = createAppAuth({
+      appId,
+      privateKey,
+      installationId: installationId.data.id,
+    });
 
-  const authAuthInstallation = createAppAuth({
-    appId,
-    privateKey,
-    installationId: installationId.data.id,
-  });
+    const auth = await authAuthInstallation({
+      type: 'installation',
+    });
 
-  const auth = await authAuthInstallation({
-    type: 'installation',
-  });
-
-  return auth.token;
+    return auth.token;
+  } catch (e) {
+    throw new Error(`Cannot find installation for app with id: ${appId}. Did you installed your app in a repo?`);
+  }
 };
 
 export const getToken = async (parameters: Parameters): Promise<string | undefined> => {
