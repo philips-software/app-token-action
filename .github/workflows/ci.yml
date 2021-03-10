@@ -54,7 +54,7 @@ jobs:
       - name: Dry run release
         env:
           GITHUB_TOKEN: ${{ steps.app.outputs.token }}
-        run: yarn && yarn run release -d -b ${{ steps.branch.outputs.name }}
+        run: yarn && yarn run release -d -b ${{ steps.branch.outputs.short_ref }}
 
       - name: Release
         if: github.event_name != 'pull_request' && contains('refs/heads/main', github.ref)
