@@ -53,7 +53,7 @@ jobs:
 
       - name: Dry run release
         env:
-          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: yarn && yarn run release -d -b ${{ steps.branch.outputs.short_ref }}
 
       - name: Release
