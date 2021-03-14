@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://github.com/philips-software/app-token-action/compare/v1.0.1...v1.0.2) (2021-03-14)
+
+
+### Bug Fixes
+
+* ensure token is masked ([#4](https://github.com/philips-software/app-token-action/issues/4)) ([c598664](https://github.com/philips-software/app-token-action/commit/c59866487153993183244316c2e70f8728f422de))
+
 ### [1.0.1](https://github.com/philips-software/app-token-action/compare/v1.0.0...v1.0.1) (2021-03-10)
 
 
