@@ -1,0 +1,31 @@
+name: 'Action docs'
+on:
+  push:
+    branches:
+      - main
+    pull_request:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./
+        id: app
+        with:
+          app_id: ${{ secrets.FOREST_RELEASER_APP_ID }}
+          app_base64_private_key: ${{ secrets.FOREST_RELEASER_APP_PRIVATE_KEY_BASE64 }}
+          auth_type: installation
+          org: philips-software
+
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ steps.app.outputs.token }}
+
+      - uses: npalm/action-docs-action@v1.1.0
+
+      - name: Update readme in the repository
+        if: github.event_name != 'pull_request'
+        uses: stefanzweifel/git-auto-commit-action@v4.8.0
+        with:
+          commit_message: "chore(ci): Updating readme"
+          file_pattern: README.md

@@ -5,26 +5,13 @@ A GitHub action that obtains a token for an app authorization which can used ins
 Before the action can be used the APP has to be installed on the subject repository or in the organization scope.
 
 
-## Inputs
+<!-- action-docs-description -->
 
-| parameter              | description                                                   | required | default |
-| ---------------------- | ------------------------------------------------------------- | -------- | ------- |
-| app_id                 | Application ID                                                | `true`   |         |
-| app_base64_private_key | Application SSH private key as base64                         | `true`   |         |
-| auth_type              | Authorization type, either app or installation                | `false`  | app     |
-| org                    | Name of the org, if not provided will be read from the event. | `false`  |         |
+<!-- action-docs-inputs -->
 
+<!-- action-docs-outputs -->
 
-## Outputs
-
-| parameter | description       |
-| --------- | ----------------- |
-| token     | Application token |
-
-
-## Runs
-
-This action is an `node12` action.
+<!-- action-docs-runs -->
 
 ## Usage
 
