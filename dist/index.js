@@ -22725,14 +22725,13 @@ function run() {
             core.setOutput('token', token);
         }
         catch (error) {
-            core.setFailed("");
+            core.setFailed('');
             if (error instanceof Error) {
                 core.setFailed(error.message);
                 core.debug(error.message);
             }
             else {
                 core.setFailed('ukndown error see logs.');
-                console.log(error);
             }
         }
     });
