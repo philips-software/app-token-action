@@ -23,14 +23,14 @@ async function run(): Promise<void> {
     core.setSecret(token);
     core.setOutput('token', token);
   } catch (error) {
-    core.setFailed("");
-      if (error instanceof Error) {
-        core.setFailed(error.message);
-        core.debug(error.message);
-      } else {
-        core.setFailed('ukndown error see logs.')
-        console.log(error);
-      }
+    core.setFailed('');
+    if (error instanceof Error) {
+      core.setFailed(error.message);
+      core.debug(error.message);
+    } else {
+      core.setFailed('ukndown error see logs.');
+      console.log(error);
+    }
   }
 }
 
