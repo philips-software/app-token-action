@@ -25,5 +25,5 @@ outputs:
     description: Application token
 
 runs:
-  using: node12
+  using: node16
   main: dist/index.js
