@@ -29,7 +29,6 @@ async function run(): Promise<void> {
       core.debug(error.message);
     } else {
       core.setFailed('ukndown error see logs.');
-      console.log(error);
     }
   }
 }
