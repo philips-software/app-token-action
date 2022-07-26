@@ -1922,7 +1922,7 @@ exports.withCustomRequest = withCustomRequest;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-const VERSION = "2.21.2";
+const VERSION = "2.21.3";
 
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
@@ -8433,6 +8433,7 @@ const Endpoints = {
     listRepoSecrets: ["GET /repos/{owner}/{repo}/codespaces/secrets"],
     listRepositoriesForSecretForAuthenticatedUser: ["GET /user/codespaces/secrets/{secret_name}/repositories"],
     listSecretsForAuthenticatedUser: ["GET /user/codespaces/secrets"],
+    preFlightWithRepoForAuthenticatedUser: ["GET /repos/{owner}/{repo}/codespaces/new"],
     removeRepositoryForSecretForAuthenticatedUser: ["DELETE /user/codespaces/secrets/{secret_name}/repositories/{repository_id}"],
     repoMachinesForAuthenticatedUser: ["GET /repos/{owner}/{repo}/codespaces/machines"],
     setRepositoriesForSecretForAuthenticatedUser: ["PUT /user/codespaces/secrets/{secret_name}/repositories"],
@@ -9122,7 +9123,7 @@ const Endpoints = {
   }
 };
 
-const VERSION = "6.0.0";
+const VERSION = "6.1.2";
 
 function endpointsToMethods(octokit, endpointsMap) {
   const newMethods = {};
@@ -9325,7 +9326,7 @@ var isPlainObject = __nccwpck_require__(3287);
 var nodeFetch = _interopDefault(__nccwpck_require__(467));
 var requestError = __nccwpck_require__(537);
 
-const VERSION = "6.1.0";
+const VERSION = "6.2.0";
 
 function getBufferResponse(response) {
   return response.arrayBuffer();
@@ -9421,7 +9422,7 @@ function fetchWrapper(requestOptions) {
       data
     };
   }).catch(error => {
-    if (error instanceof requestError.RequestError) throw error;
+    if (error instanceof requestError.RequestError) throw error;else if (error.name === "AbortError") throw error;
     throw new requestError.RequestError(error.message, 500, {
       request: requestOptions
     });
