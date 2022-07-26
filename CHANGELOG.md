@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/philips-software/app-token-action/compare/v1.1.0...v1.1.1) (2022-07-26)
+
+
+### Bug Fixes
+
+* Generation of JS artifact ([#134](https://github.com/philips-software/app-token-action/issues/134)) ([0cc3333](https://github.com/philips-software/app-token-action/commit/0cc333300bf9df23facb1abdeb6de7dab4dcfa38))
+
 ## [1.1.0](https://github.com/philips-software/app-token-action/compare/v1.0.2...v1.1.0) (2022-07-26)
 
 
