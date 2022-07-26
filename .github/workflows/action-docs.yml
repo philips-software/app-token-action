@@ -9,7 +9,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./
         id: app
         with:
@@ -18,7 +18,7 @@ jobs:
           auth_type: installation
           org: philips-software
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           token: ${{ steps.app.outputs.token }}
 
