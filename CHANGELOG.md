@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/philips-software/app-token-action/compare/v1.0.2...v1.1.0) (2022-07-26)
+
+
+### Features
+
+* Upgrade action to node 16 ([#132](https://github.com/philips-software/app-token-action/issues/132)) ([c1f5bd4](https://github.com/philips-software/app-token-action/commit/c1f5bd4c1a761abf0d757352eaa6dea4f66993cf))
+
 ### [1.0.2](https://github.com/philips-software/app-token-action/compare/v1.0.1...v1.0.2) (2021-03-14)
 
 
