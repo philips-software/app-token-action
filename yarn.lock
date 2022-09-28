@@ -817,16 +817,16 @@
     read-package-json-fast "^2.0.3"
     which "^2.0.2"
 
-"@octokit/auth-app@^4.0.4":
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/@octokit/auth-app/-/auth-app-4.0.4.tgz#e774da352e7c9d0648d5d0fdf0fb75cd6a16c2af"
-  integrity sha512-s3MK7M9e8TD/ih8lCBTrdZ74XPHMtHV7aycCKNBRQ2QJPdMwqx0mVbmLOIuW4dCwMX7K243+JAvf52tryFHRdQ==
+"@octokit/auth-app@^4.0.6":
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/@octokit/auth-app/-/auth-app-4.0.6.tgz#d5e8f10fc5c277c89f8b317fede9b68cbc00dca5"
+  integrity sha512-zFWDWZ2b1YH9EohhJFswSGzhXdO6al+DPt99ipYUwC81CsFP3wsC4g4WNxpLj8+CIQrGURa8sIcedq2QALNRAw==
   dependencies:
     "@octokit/auth-oauth-app" "^5.0.0"
     "@octokit/auth-oauth-user" "^2.0.0"
     "@octokit/request" "^6.0.0"
     "@octokit/request-error" "^3.0.0"
-    "@octokit/types" "^6.0.3"
+    "@octokit/types" "^7.0.0"
     "@types/lru-cache" "^5.1.0"
     deprecation "^2.3.1"
     lru-cache "^6.0.0"
@@ -965,6 +965,11 @@
   resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-12.11.0.tgz#da5638d64f2b919bca89ce6602d059f1b52d3ef0"
   integrity sha512-VsXyi8peyRq9PqIz/tpqiL2w3w80OgVMwBHltTml3LmVvXiphgeqmY9mvBw9Wu7e0QWk/fqD37ux8yP5uVekyQ==
 
+"@octokit/openapi-types@^13.11.0":
+  version "13.13.0"
+  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-13.13.0.tgz#c9bd7fafd41984176a806938e0a56b7c39425014"
+  integrity sha512-EQ7/LFp2nb1bU5vhLvfEsImi7RvGXp081ytaMRQXDyVcpLpmOCUMafYfHL72BA7wCOnEmJR0LznBS6sCAIlm9Q==
+
 "@octokit/plugin-paginate-rest@^2.17.0":
   version "2.21.3"
   resolved "https://registry.yarnpkg.com/@octokit/plugin-paginate-rest/-/plugin-paginate-rest-2.21.3.tgz#7f12532797775640dbb8224da577da7dc210c87e"
@@ -1058,6 +1063,13 @@
   integrity sha512-eJ2jbzjdijiL3B4PrSQaSjuF2sPEQPVCPzBvTHJD9Nz+9dw2SGH4K4xeQJ77YfTq5bRQ+bD8wT11JbeDPmxmGg==
   dependencies:
     "@octokit/openapi-types" "^12.11.0"
+
+"@octokit/types@^7.0.0":
+  version "7.5.1"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-7.5.1.tgz#4e8b182933c17e1f41cc25d44757dbdb7bd76c1b"
+  integrity sha512-Zk4OUMLCSpXNI8KZZn47lVLJSsgMyCimsWWQI5hyjZg7hdYm0kjotaIkbG0Pp8SfU2CofMBzonboTqvzn3FrJA==
+  dependencies:
+    "@octokit/openapi-types" "^13.11.0"
 
 "@semantic-release/changelog@^6.0.1":
   version "6.0.1"
