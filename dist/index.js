@@ -4701,11 +4701,15 @@ async function sendRequestWithRetries(state, request, options, createdAt, retrie
   }
 }
 
-const VERSION = "4.0.4";
+const VERSION = "4.0.7";
 
 function createAppAuth(options) {
   if (!options.appId) {
     throw new Error("[@octokit/auth-app] appId option is required");
+  }
+
+  if (!Number.isFinite(+options.appId)) {
+    throw new Error("[@octokit/auth-app] appId option must be a number or numeric string");
   }
 
   if (!options.privateKey) {
