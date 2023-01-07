@@ -9,7 +9,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # ratchet:actions/checkout@v3
       - uses: ./
         id: app
         with:
@@ -17,16 +17,13 @@ jobs:
           app_base64_private_key: ${{ secrets.FOREST_RELEASER_APP_PRIVATE_KEY_BASE64 }}
           auth_type: installation
           org: philips-software
-
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # ratchet:actions/checkout@v3
         with:
           token: ${{ steps.app.outputs.token }}
-
-      - uses: npalm/action-docs-action@v1.3.0
-
+      - uses: npalm/action-docs-action@1ae674557116c26e42a4b278d8d49f0a25a4d670 # ratchet:npalm/action-docs-action@v1.3.0
       - name: Update readme in the repository
         if: github.event_name != 'pull_request'
-        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+        uses: stefanzweifel/git-auto-commit-action@3ea6ae190baf489ba007f7c92608f33ce20ef04a # ratchet:stefanzweifel/git-auto-commit-action@v4.16.0
         with:
           commit_message: "chore(ci): Updating readme"
           file_pattern: README.md
