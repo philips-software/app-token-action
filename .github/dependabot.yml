@@ -6,10 +6,14 @@ updates:
     directory: '/'
     # Check the npm registry for updates every day (weekdays)
     schedule:
-      interval: 'daily'
+      interval: 'weekly'
+    groups:
+      octokit:
+        patterns:
+          - "@octokit/*"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       # Check for updates to GitHub Actions every weekday
-      interval: "daily"
+      interval: "weekly"
