@@ -33,7 +33,7 @@ Action will set application or application installation token as output.
 <!-- action-docs-runs -->
 ## Runs
 
-This action is a `node16` action.
+This action is a `node20` action.
 <!-- action-docs-runs -->
 
 ## Usage
