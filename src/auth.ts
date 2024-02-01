@@ -1,3 +1,4 @@
+import * as core from '@actions/core';
 import { createAppAuth } from '@octokit/auth-app';
 import { Octokit } from '@octokit/rest';
 
@@ -40,7 +41,10 @@ export const getAppInstallationToken = async (privateKey: string, appId: number,
 
     return auth.token;
   } catch (e) {
-    throw new Error(`Cannot find installation for app with id: ${appId}. Did you installed your app in a repo?`);
+    core.debug((e as Error).message);
+    throw new Error(
+      `Cannot obtain a token app with id: ${appId}. Please ensure all inputs are correct, run the action in debug mode for more details.?`,
+    );
   }
 };
 

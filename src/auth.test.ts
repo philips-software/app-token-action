@@ -1,7 +1,18 @@
 import nock from 'nock';
 import { getToken, Parameters } from './auth';
+import { createAppAuth } from '@octokit/auth-app';
 
-const testOrg = 'philips-test';
+nock.disableNetConnect();
+
+jest.mock('@octokit/auth-app');
+const mockOctokit = {
+  apps: jest.requireActual('@octokit/rest').Octokit,
+};
+
+jest.mock('@octokit/rest', () => ({
+  Octokit: jest.fn().mockImplementation(() => mockOctokit),
+}));
+const mockedCreateAppAuth = createAppAuth as unknown as jest.Mock;
 
 // Key generated via a dummy app and encoded as base64 string
 const testBase64PrivateKey =
@@ -14,28 +25,10 @@ const defaultParameters: Parameters = {
   base64PrivateKey: testBase64PrivateKey,
 };
 
-function mockGetOrgInstallation(id: number, org: string): void {
-  const responseCode = id < 0 ? 403 : 200;
-  nock('https://api.github.com').persist().get(`/orgs/${org}/installation`).reply(responseCode, { id });
-}
-
-function mockAppInstallationToken(id: string): void {
-  nock('https://api.github.com')
-    .persist()
-    .post(`/app/installations/${id}/access_tokens`)
-    .reply(200, {
-      token: 'abcdefgh12345678',
-      expires_at: '2222-07-11T22:14:10Z',
-      permissions: { issues: 'write' },
-    });
-}
-
 describe('Auth type installation', () => {
   beforeEach(() => {
-    jest.restoreAllMocks();
     jest.clearAllMocks();
-    mockGetOrgInstallation(47, testOrg);
-    mockAppInstallationToken('47');
+    jest.restoreAllMocks();
   });
 
   test('Should throw exception for invalid private key.', async () => {
@@ -47,7 +40,27 @@ describe('Auth type installation', () => {
     ).rejects.toThrow();
   });
 
+  test('Should throw error if create app installation fails.', async () => {
+    mockOctokit.apps.getOrgInstallation = jest.fn().mockImplementation(() => {
+      throw new Error('App installion error.');
+    });
+
+    mockedCreateAppAuth.mockImplementation(() => jest.fn().mockResolvedValue({ token: 'abcdefgh12345678' }));
+
+    await expect(
+      getToken({
+        ...defaultParameters,
+      }),
+    ).rejects.toThrow();
+  });
+
   test('Create token for valid inputs.', async () => {
+    mockOctokit.apps.getOrgInstallation = jest.fn().mockImplementation(() => {
+      return { data: { id: 1 } };
+    });
+
+    mockedCreateAppAuth.mockImplementation(() => jest.fn().mockResolvedValue({ token: 'abcdefgh12345678' }));
+
     const token = await getToken({
       ...defaultParameters,
     });
@@ -60,8 +73,6 @@ describe('App not installed.', () => {
     jest.restoreAllMocks();
     jest.clearAllMocks();
     jest.resetAllMocks();
-    mockGetOrgInstallation(-1, 'org-without-apps');
-    mockAppInstallationToken('-1');
   });
 
   test('Should throw exception for app that is not installed..', async () => {
@@ -74,11 +85,10 @@ describe('App not installed.', () => {
   });
 });
 
-describe('Auth type 222', () => {
+describe('Auth type app', () => {
   beforeEach(() => {
     jest.restoreAllMocks();
     jest.clearAllMocks();
-    mockGetOrgInstallation(47, testOrg);
   });
 
   test('Should throw exception for invalid private key.', async () => {
@@ -91,7 +101,18 @@ describe('Auth type 222', () => {
     ).rejects.toThrow();
   });
 
+  test('Should throw error if create auth app fails.', async () => {
+    mockedCreateAppAuth.mockImplementation(() => jest.fn().mockRejectedValue(new Error('App error.')));
+    await expect(
+      getToken({
+        ...defaultParameters,
+      }),
+    ).rejects.toThrow();
+  });
+
   test('Create token for valid inputs.', async () => {
+    mockedCreateAppAuth.mockImplementation(() => jest.fn().mockResolvedValue({ token: 'abcdefgh12345678' }));
+
     const token = await getToken({
       ...defaultParameters,
       type: 'app',
