@@ -12,14 +12,7 @@ Action will set application or application installation token as output.
 <!-- action-docs-description -->
 
 <!-- action-docs-inputs -->
-## Inputs
 
-| parameter | description | required | default |
-| --- | --- | --- | --- |
-| app_id | Application ID | `true` |  |
-| app_base64_private_key | Application SSH private key as base64 | `true` |  |
-| auth_type | Authorization type, either app or installation | `false` | app |
-| org | Name of the org, if not provided will be read from the event. | `false` |  |
 <!-- action-docs-inputs -->
 
 <!-- action-docs-outputs -->
