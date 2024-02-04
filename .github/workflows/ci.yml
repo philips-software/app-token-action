@@ -26,7 +26,7 @@ jobs:
       - uses: npalm/action-docs-action@b62a69e27ae389aa92b450f647d37409b9277bf0 # ratchet:npalm/action-docs-action@v1.4.0
   
       - name: Update dist in the repository
-        if: github.ref == 'refs/heads/main' && github.repository_owner == 'npalm'
+        if: github.ref != 'refs/heads/main' && github.repository_owner == 'npalm'
 
         uses: stefanzweifel/git-auto-commit-action@3ea6ae190baf489ba007f7c92608f33ce20ef04a # ratchet:stefanzweifel/git-auto-commit-action@v4.16.0
         with:
