@@ -4,6 +4,7 @@ on:
 
 jobs:
   test:
+    if: github.repository == 'philips-software/app=token-action'
     strategy:
       matrix:
         os: [ubuntu-22.04, ubuntu-latest, windows-latest]

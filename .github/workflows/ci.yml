@@ -4,6 +4,7 @@ on:
     branches:
       - main
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -14,51 +15,54 @@ jobs:
         with:
           node-version: 20
 
+      # build and test action
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
       - name: Check format and lint
         run: yarn run format-check && yarn lint
       - name: Build and package
         run: yarn build
 
+      # update docs
+      - uses: npalm/action-docs-action@b62a69e27ae389aa92b450f647d37409b9277bf0 # ratchet:npalm/action-docs-action@v1.4.0
+  
       - name: Update dist in the repository
-        if: github.event_name != 'pull_request'
+        if: github.ref != 'refs/heads/main' && github.repository_owner == 'npalm'
+
         uses: stefanzweifel/git-auto-commit-action@3ea6ae190baf489ba007f7c92608f33ce20ef04a # ratchet:stefanzweifel/git-auto-commit-action@v4.16.0
         with:
-          commit_message: 'chore(ci): Updating dist'
-          file_pattern: dist/*
+          commit_message: 'chore(ci): Updating dist and docs'
+          file_pattern: 'dist/* README.md'
+
+      - name: Create Pull Request (main branch only)
+        if: github.ref == 'refs/heads/main' && github.repository_owner == 'npalm'
+        uses: peter-evans/create-pull-request@153407881ec5c347639a548ade7d8ad1d6740e38 # ratchet:peter-evans/create-pull-request@v5.0.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore(ci): Updating dist and docs'
+          title: 'chore(ci): Updating dist and docs'
+          branch: update-docs
+          branch-suffix: random
+          base: ${{ github.event.pull_request.base.ref }}
+          delete-branch: true
+
 
   release:
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # ratchet:actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8 # ratchet:actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - uses: ./
-        id: app
-        with:
-          app_id: ${{ secrets.FOREST_RELEASER_APP_ID }}
-          app_base64_private_key: ${{ secrets.FOREST_RELEASER_APP_PRIVATE_KEY_BASE64 }}
-          auth_type: installation
-          org: philips-software
-
-      - name: Extract branch name
-        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
-        id: branch
-
-      - name: Dry run release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: yarn && yarn run release -d -b ${{ steps.branch.outputs.short_ref }}
 
       - name: Release
-        if: github.event_name != 'pull_request' && contains('refs/heads/main', github.ref)
-        env:
-          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
-        run: yarn && yarn run release
+        uses: google-github-actions/release-please-action@e0b9d1885d92e9a93d5ce8656de60e3b806e542c # ratchet:google-github-actions/release-please-action@v3
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: simple
+          fork: true
