@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/philips-software/app-token-action/compare/v1.1.2...v2.0.0) (2024-02-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade node 20 ([#293](https://github.com/philips-software/app-token-action/issues/293))
+
+### Bug Fixes
+
+* upgrade node 20 ([#293](https://github.com/philips-software/app-token-action/issues/293)) ([097dbbd](https://github.com/philips-software/app-token-action/commit/097dbbda6a2b7edc3020109306eb83a956bc4f62))
+
 ## [1.1.1](https://github.com/philips-software/app-token-action/compare/v1.1.0...v1.1.1) (2022-07-26)
 
 
