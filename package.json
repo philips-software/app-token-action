@@ -28,7 +28,7 @@
     "@semantic-release/github": "^9.2.6",
     "@semantic-release/release-notes-generator": "^12.1.0",
     "@types/jest": "^29.5.11",
-    "@types/node": "^20.11.15",
+    "@types/node": "^20.11.17",
     "@vercel/ncc": "^0.38.1",
     "conventional-changelog-conventionalcommits": "^7.0.2",
     "eslint": "^8.56.0",
