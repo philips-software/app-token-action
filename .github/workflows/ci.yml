@@ -24,7 +24,7 @@ jobs:
         run: yarn build
 
       # update docs
-      - uses: npalm/action-docs-action@9fa96f2c32b29363abe935e2c3d4ee27bc84dce1 # ratchet:npalm/action-docs-action@v2.0.0
+      - uses: npalm/action-docs-action@5747a92c96761464cdad985013ffbd4d74f42ee4 # ratchet:npalm/action-docs-action@v3.0.0
   
       - name: Update dist in the repository
         if: github.ref != 'refs/heads/main'
