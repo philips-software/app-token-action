@@ -862,10 +862,10 @@
     node-gyp "^10.0.0"
     which "^4.0.0"
 
-"@octokit/auth-app@^6.0.3":
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/@octokit/auth-app/-/auth-app-6.0.3.tgz#4c0ba68e8d3b1a55c34d1e68ea0ca92ef018bb7a"
-  integrity sha512-9N7IlBAKEJR3tJgPSubCxIDYGXSdc+2xbkjYpk9nCyqREnH8qEMoMhiEB1WgoA9yTFp91El92XNXAi+AjuKnfw==
+"@octokit/auth-app@^6.0.4":
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/@octokit/auth-app/-/auth-app-6.0.4.tgz#3c435c4c9ba9005405d889f4a5018df5e8ca93cf"
+  integrity sha512-TPmJYgd05ok3nzHj7Y6we/V7Ez1wU3ztLFW3zo/afgYFtqYZg0W7zb6Kp5ag6E85r8nCE1JfS6YZoZusa14o9g==
   dependencies:
     "@octokit/auth-oauth-app" "^7.0.0"
     "@octokit/auth-oauth-user" "^4.0.0"
@@ -963,10 +963,10 @@
     "@octokit/types" "^12.0.0"
     btoa-lite "^1.0.0"
 
-"@octokit/openapi-types@^19.1.0":
-  version "19.1.0"
-  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-19.1.0.tgz#75ec7e64743870fc73e1ab4bc6ec252ecdd624dc"
-  integrity sha512-6G+ywGClliGQwRsjvqVYpklIfa7oRPA0vyhPQG/1Feh+B+wU0vGH1JiJ5T25d3g1JZYBHzR2qefLi9x8Gt+cpw==
+"@octokit/openapi-types@^20.0.0":
+  version "20.0.0"
+  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-20.0.0.tgz#9ec2daa0090eeb865ee147636e0c00f73790c6e5"
+  integrity sha512-EtqRBEjp1dL/15V7WiX5LJMIxxkdiGJnabzYx5Apx4FkQIFgAfKumXeYAqqJCj1s+BMX4cPFIFC4OLCR6stlnA==
 
 "@octokit/plugin-paginate-rest@^9.0.0":
   version "9.1.5"
@@ -1033,12 +1033,12 @@
     "@octokit/plugin-request-log" "^4.0.0"
     "@octokit/plugin-rest-endpoint-methods" "^10.0.0"
 
-"@octokit/types@^12.0.0", "@octokit/types@^12.2.0", "@octokit/types@^12.3.0", "@octokit/types@^12.4.0":
-  version "12.4.0"
-  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-12.4.0.tgz#8f97b601e91ce6b9776ed8152217e77a71be7aac"
-  integrity sha512-FLWs/AvZllw/AGVs+nJ+ELCDZZJk+kY0zMen118xhL2zD0s1etIUHm1odgjP7epxYU1ln7SZxEUWYop5bhsdgQ==
+"@octokit/types@^12.0.0", "@octokit/types@^12.2.0", "@octokit/types@^12.3.0", "@octokit/types@^12.4.0", "@octokit/types@^12.6.0":
+  version "12.6.0"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-12.6.0.tgz#8100fb9eeedfe083aae66473bd97b15b62aedcb2"
+  integrity sha512-1rhSOfRa6H9w4YwK0yrf5faDaDTb+yLyBUKOCV4xtCDB5VmIPqd/v9yr9o6SAzOAlRxMiRiCic6JVM1/kunVkw==
   dependencies:
-    "@octokit/openapi-types" "^19.1.0"
+    "@octokit/openapi-types" "^20.0.0"
 
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
