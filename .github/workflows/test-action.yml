@@ -10,7 +10,7 @@ jobs:
         os: [ubuntu-22.04, ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # ratchet:actions/checkout@v3
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # ratchet:actions/checkout@v3
         with:
           fetch-depth: 0
 
