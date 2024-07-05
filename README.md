@@ -1,5 +1,9 @@
 # App token action
 
+> [!IMPORTANT]
+> This action is deprecated. Please migrate to the [github-app-token-action](https://github.com/actions/create-github-app-token).
+
+
 A GitHub action that obtains a token for an app authorization which can used instead of a personal access token (PAT) for example. Currently the *app* and *installation* scope are supported. For more details check out the GitHub App authentication [docs](https://docs.github.com/en/free-pro-team@latest/developers/apps/authenticating-with-github-apps)
 
 Before the action can be used the APP has to be installed on the subject repository or in the organization scope.
