@@ -1,7 +1,9 @@
 # App token action
 
 > [!IMPORTANT]
-> This action is deprecated. Please migrate to the [github-app-token-action](https://github.com/actions/create-github-app-token).
+> This action is deprecated. Please migrate to the [github-app-token-action](https://github.com/actions/create-github-app-token). 
+>
+> Migration is almost straight forward, be-aware that GitHub actions requires the key as input and not the base64 encoded version of the private key.
 
 
 A GitHub action that obtains a token for an app authorization which can used instead of a personal access token (PAT) for example. Currently the *app* and *installation* scope are supported. For more details check out the GitHub App authentication [docs](https://docs.github.com/en/free-pro-team@latest/developers/apps/authenticating-with-github-apps)
