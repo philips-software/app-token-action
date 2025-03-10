@@ -37542,6 +37542,10 @@ const auth_1 = __nccwpck_require__(3497);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            core.warning('This action is deprecated and will no longer be maintained. Please migrate to https://github.com/actions/create-github-app-token as soon as possible.', {
+                title: 'Deprecated Action',
+                file: process.env.GITHUB_WORKFLOW_REF || '',
+            });
             const authType = core.getInput('auth_type', { required: true });
             const appId = Number(core.getInput('app_id', { required: true }));
             const appBase64PrivateKey = core.getInput('app_base64_private_key', {
