@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/philips-software/app-token-action/compare/v2.0.0...v2.0.1) (2025-03-10)
+
+
+### Bug Fixes
+
+* Add deprecation warning ([#364](https://github.com/philips-software/app-token-action/issues/364)) ([74035a2](https://github.com/philips-software/app-token-action/commit/74035a22e6e0d2a3cc94a79d2b48d8d4ecb80449))
+
 ## [2.0.0](https://github.com/philips-software/app-token-action/compare/v1.1.2...v2.0.0) (2024-02-04)
 
 
